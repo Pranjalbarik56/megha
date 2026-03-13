@@ -1,0 +1,270 @@
+```html
+<!DOCTYPE html>
+<html lang="bn">
+
+<head>
+<meta charset="UTF-8">
+<title>For Megha 💗</title>
+
+<style>
+
+body{
+margin:0;
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background:#8B0000;
+font-family:sans-serif;
+overflow:hidden;
+}
+
+/* BOOK */
+
+.book{
+width:400px;
+height:520px;
+position:relative;
+perspective:2000px;
+}
+
+/* PAGES */
+
+.page{
+position:absolute;
+width:100%;
+height:100%;
+background:#ffb6d9;
+border-radius:15px;
+box-shadow:0 15px 40px rgba(0,0,0,0.5);
+transform-origin:left;
+transition:1s;
+padding:25px;
+box-sizing:border-box;
+backface-visibility:hidden;
+display:flex;
+flex-direction:column;
+align-items:center;
+}
+
+#p1{z-index:4;}
+#p2{z-index:3;}
+#p3{z-index:2;}
+#p4{z-index:1;}
+
+.page.flipped{
+transform:rotateY(-180deg);
+}
+
+/* IMAGES */
+
+.page img{
+width:100%;
+border-radius:12px;
+margin-bottom:10px;
+}
+
+/* HEART */
+
+.bigheart{
+font-size:120px;
+color:red;
+text-align:center;
+}
+
+.text{
+text-align:center;
+font-size:20px;
+margin-top:20px;
+font-weight:bold;
+color:#6a0045;
+}
+
+/* POEM BOX */
+
+.poem{
+background:white;
+padding:15px;
+border-radius:15px;
+border:4px solid #ff7fc4;
+font-size:16px;
+line-height:1.6;
+width:100%;
+box-sizing:border-box;
+}
+
+/* SIGNATURE */
+
+.signature{
+display:block;
+margin-top:10px;
+font-weight:bold;
+text-align:left;
+}
+
+/* BUTTON */
+
+button{
+margin-top:15px;
+padding:8px 18px;
+border:none;
+border-radius:20px;
+background:#ff3b88;
+color:white;
+cursor:pointer;
+font-size:15px;
+}
+
+button:hover{
+background:#ff1f6f;
+}
+
+/* FALLING ITEMS */
+
+.fall{
+position:absolute;
+top:-50px;
+animation:fall linear infinite;
+pointer-events:none;
+}
+
+@keyframes fall{
+
+0%{
+transform:translateY(-50px) rotate(0deg);
+opacity:1;
+}
+
+100%{
+transform:translateY(110vh) rotate(360deg);
+opacity:0;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<audio autoplay loop>
+<source src="megha.mp3" type="audio/mp3">
+</audio>
+
+<div class="book">
+
+<!-- PAGE 1 -->
+
+<div class="page" id="p1">
+
+<div class="bigheart">❤️</div>
+
+<div class="text">
+ইহা শুধুমাত্র আমার মেঘবালিকার জন্য তো,<br>
+দয়া করে মেঘবালিকাই খুলবে ।
+</div>
+
+<button onclick="flip(1)">Open 💌</button>
+
+</div>
+
+<!-- PAGE 2 -->
+
+<div class="page" id="p2">
+
+<img src="megha1.jpeg">
+
+<div class="poem">
+তোমার চোখ দুটো এত সুন্দর,<br>
+তবু সেই চোখেই এনেছি অভিমান।<br>
+একবার শুধু তাকাও আমার দিকে—<br>
+দেখবে সেখানে লুকিয়ে আছে<br>
+একটা ছোট্ট “Sorry” আর অনেক ভালোবাসা। 💙
+</div>
+
+<button onclick="flip(2)">Next 💗</button>
+
+</div>
+
+<!-- PAGE 3 -->
+
+<div class="page" id="p3">
+
+<img src="megha2.jpeg">
+
+<div class="poem">
+তোমার ঠোঁট দুটো গোলাপের মতো লাল,<br>
+সেখানে হাসি দেখার ইচ্ছে আমার প্রতিটা কাল।<br>
+ভুল করে আজ সেই হাসিটা করেছি হারিয়ে—<br>
+ক্ষমা করো আমায়, sorry বলছি মাথা নত করে। 💔🌹
+</div>
+
+<button onclick="flip(3)">Next 💞</button>
+
+</div>
+
+<!-- PAGE 4 -->
+
+<div class="page" id="p4">
+
+<img src="megha3.jpeg">
+
+<div class="poem">
+তোমার ঠোঁটের সেই মিষ্টি হাসি যদি আবার ফিরে পাই,<br>
+তবে আমার সব ভুলের বোঝা আজই মুছে যায়।<br>
+অভিমানের মেঘ সরিয়ে একবার শুধু তাকাও—<br>
+নীরবে বলি, ক্ষমা করো, তোমায় খুব ভালোবাসি।<br><br>
+
+<span class="signature">
+ইতি তোমার DuDu 😘
+</span>
+
+</div>
+
+<button onclick="resetBook()">Back To Start 💖</button>
+
+</div>
+
+</div>
+
+<script>
+
+/* PAGE FLIP */
+
+function flip(page){
+document.getElementById("p"+page).classList.add("flipped");
+}
+
+/* RESET BOOK */
+
+function resetBook(){
+document.querySelectorAll(".page").forEach(p=>{
+p.classList.remove("flipped");
+});
+}
+
+/* FALLING HEARTS & FLOWERS */
+
+let symbols=["💗","💖","🌸","🌺"];
+
+for(let i=0;i<35;i++){
+
+let el=document.createElement("div");
+
+el.className="fall";
+
+el.innerHTML=symbols[Math.floor(Math.random()*symbols.length)];
+
+el.style.left=Math.random()*100+"vw";
+el.style.fontSize=(20+Math.random()*20)+"px";
+el.style.animationDuration=(5+Math.random()*6)+"s";
+
+document.body.appendChild(el);
+
+}
+
+</script>
+
+</body>
+</html>
+```
